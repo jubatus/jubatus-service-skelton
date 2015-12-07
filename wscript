@@ -9,7 +9,7 @@ def options(opt):
 
 def generate(ctx):
   call(['jenerator', '-l', 'server', '-o', '.', '-n', 'jubatus', '-t', name + '.idl'])
-  call(['jenerator', '-l', 'cpp', '-o', '.', '-n', 'jubatus', '-t', name + '.idl'])
+  call(['jenerator', '-l', 'cpp', '-o', '.', '-n', 'jubatus', name + '.idl'])
 
 def clean_generated(ctx):
   generated = [
@@ -34,7 +34,7 @@ def configure(conf):
 
 def build(bld):
   bld.program(
-    source = [name+'_serv.cpp', name+'_impl.cpp'],
+    source = [name+'_serv.cpp', name+'_impl.cpp', name+'_driver.cpp', name+'_algorithm.cpp'],
     target = name,
     use = ['JUBATUS', 'JUBATUS_CORE'],
     )
